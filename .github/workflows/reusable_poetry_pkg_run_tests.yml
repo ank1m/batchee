@@ -51,7 +51,7 @@ jobs:
           poetry-version: ${{ env.POETRY_VERSION }}
 
       - name: Install package
-        run: poetry install --extras ${{ inputs.install-extras-names }}
+        run: poetry install --extras "${{ inputs.install-extras-names }}"
         
       - name: Lint
         run: |
