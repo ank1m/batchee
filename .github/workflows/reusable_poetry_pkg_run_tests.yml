@@ -4,7 +4,7 @@ on:
   workflow_call:
     inputs:
       package-name:
-        description: 'The name of the Python package/directory to format'
+        description: 'The name of the Python package/directory to format and test'
         required: true
         type: string
       python-version:
