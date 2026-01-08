@@ -87,6 +87,7 @@ def get_batch_indices(filenames: list, logger: logging.Logger = default_logger) 
     list[int]
         batch index for each filename in the original list, e.g. [0, 0, 0, 1, 1, 1, ...]
     """
+
     logger.info(f"get_batch_indices() starting --- with {len(filenames)} filenames")
 
     # Make a new list with days and scans, e.g. [('20130701', 'S009'), ('20130701', 'S009'), ...]
@@ -102,7 +103,6 @@ def get_batch_indices(filenames: list, logger: logging.Logger = default_logger) 
 
     # Unique day-scans are determined (while keeping the same order). Each will be its own batch.
     unique_day_scans: list[tuple[str, str]] = sorted(set(day_and_scans), key=day_and_scans.index)
-
     logger.info(f"unique_day_scans==={unique_day_scans}.")
 
     # Map each day/scan to an integer

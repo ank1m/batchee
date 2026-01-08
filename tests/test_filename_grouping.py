@@ -65,3 +65,14 @@ def test_main_cli():
         grouped_names = batchee.tempo_filename_parser.main()
 
     assert grouped_names == [example_filenames[0:3], example_filenames[3:6], example_filenames[6:9]]
+
+
+def test_empty_list():
+    results = get_batch_indices([])
+    assert results == []
+
+
+def test_invalid_filenames():
+    invalid_filenames = ["invalid.nc", "TEMPO_NO2_L2_V03_20240731.nc", "random_file.txt"]
+    results = get_batch_indices(invalid_filenames)
+    assert results == []

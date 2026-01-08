@@ -80,6 +80,9 @@ def _get_output_bounding_box(input_items: list[Item]) -> list[float]:
     `pystac.Item` bounding box extents.
 
     """
+    if not input_items:
+        return []
+
     bounding_box = input_items[0].bbox
 
     for item in input_items:
