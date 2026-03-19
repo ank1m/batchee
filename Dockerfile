@@ -19,7 +19,7 @@ WORKDIR /worker
 COPY --chown=dockeruser:dockeruser pyproject.toml README.md LICENSE ./
 COPY --chown=dockeruser:dockeruser batchee ./batchee
 COPY --chown=dockeruser:dockeruser uv.lock ./
-COPY --chown=dockeruser:dockeruser docker-entrypoint.sh ./
+COPY --chown=dockeruser:dockeruser --chmod=755 docker-entrypoint.sh ./
 
 USER dockeruser
 RUN uv sync --frozen
@@ -27,7 +27,5 @@ RUN uv tool run hatch version
 
 ENV HOME=/home/dockeruser
 ENV PATH="/worker/.venv/bin:$PATH"
-
-RUN chmod +x ./docker-entrypoint.sh
 
 ENTRYPOINT ["./docker-entrypoint.sh"]
