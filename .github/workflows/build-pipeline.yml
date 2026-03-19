@@ -1,5 +1,6 @@
-# This is the main build pipeline that verifies and publishes the software
-name: Build Harmony filtering image
+# Builds the batchee Docker image on PRs and pushes.
+# Publishes to GHCR only on version tag pushes.
+name: Build batchee image
 
 on:
   pull_request:
