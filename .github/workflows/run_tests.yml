@@ -26,6 +26,8 @@ jobs:
 
     permissions:
       contents: read
+
+    steps:
       - name: Retrieve repository
         uses: actions/checkout@v6
 
