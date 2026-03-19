@@ -5,8 +5,9 @@ ARG SERVICE_VERSION
 ENV SETUPTOOLS_SCM_PRETEND_VERSION=$SERVICE_VERSION
 
 RUN apt-get update \
-    && pip3 install --no-cache-dir --upgrade pip uv \
     && apt-get clean && rm -rf /var/lib/apt/lists/*
+
+COPY --from=ghcr.io/astral-sh/uv:latest /uv /usr/local/bin/uv
 
 # Create a new user
 RUN adduser --quiet --disabled-password --shell /bin/sh --home /home/dockeruser --gecos "" --uid 1000 dockeruser
