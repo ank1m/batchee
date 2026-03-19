@@ -8,6 +8,10 @@ name: A reusable workflow to build and run the unit test suite
 on:
   push:
   workflow_dispatch:
+  
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
 
 env:
   PYTHON_VERSION: "3.12"
