@@ -20,7 +20,13 @@ env:
   IMAGE_NAME: ${{ github.repository }}
 
 jobs:
+  tests:
+    uses: ./.github/workflows/run_tests.yml
+    secrets:
+      codecov_token: ${{ secrets.CODECOV_TOKEN }}
+
   build:
+    needs: tests
     runs-on: ubuntu-latest
     permissions:
       contents: read
