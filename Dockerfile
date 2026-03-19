@@ -11,7 +11,6 @@ RUN apt-get update \
 # Create a new user
 RUN adduser --quiet --disabled-password --shell /bin/sh --home /home/dockeruser --gecos "" --uid 1000 dockeruser
 
-USER root
 RUN mkdir -p /worker && chown dockeruser /worker
 
 WORKDIR /worker
