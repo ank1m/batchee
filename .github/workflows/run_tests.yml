@@ -15,10 +15,6 @@ on:
         required: true
   workflow_dispatch:
 
-concurrency:
-  group: ${{ github.workflow }}-${{ github.ref }}
-  cancel-in-progress: true
-
 env:
   PYTHON_VERSION: "3.12"
 
