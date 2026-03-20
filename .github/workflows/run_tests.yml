@@ -9,8 +9,6 @@ name: Run tests and linting
 
 on:
   push:
-  pull_request:
-    branches: [develop, main, 'release/**']
   workflow_call:
     secrets:
       codecov_token:
