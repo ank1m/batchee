@@ -3,10 +3,6 @@ name: Test and Build on PR
 on:
   pull_request:
 
-permissions:
-  contents: read
-  packages: read
-
 jobs:
   validate:
     uses: ./.github/workflows/reusable-gate.yml
@@ -36,4 +32,7 @@ jobs:
 
   docker:
     needs: tests
+    permissions:
+      contents: read
+      packages: write
     uses: ./.github/workflows/reusable-docker.yml

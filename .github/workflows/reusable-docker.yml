@@ -16,6 +16,8 @@ env:
 
 jobs:
   build_docker:
+    permissions:
+      packages: write
     runs-on: ubuntu-latest
 
     steps:
