@@ -6,22 +6,25 @@ on:
       - 'release/*'
 
 jobs:
-  validate:
-    permissions:
-      contents: write
-    uses: ./.github/workflows/reusable-gate.yml
-    with:
-      branch_name: ${{ github.ref_name }}
-      tag: true
-
   tests:
-    needs: [validate]
     uses: ./.github/workflows/reusable-tests.yml
     secrets:
       codecov_token: ${{ secrets.CODECOV_TOKEN }}
 
-  docker:
-    needs: [tests, validate]
+  build_docker:
+    needs: tests
+    uses: ./.github/workflows/reusable-docker.yml
+
+  validate:
+    needs: build_docker
+    permissions:
+      contents: write
+    uses: ./.github/workflows/reusable-gate.yml
+    with:
+      tag: true
+
+  push_docker:
+    needs: validate
     permissions:
       packages: write
     uses: ./.github/workflows/reusable-docker.yml

@@ -10,8 +10,6 @@ permissions:
 jobs:
   validate:
     uses: ./.github/workflows/reusable-gate.yml
-    with:
-      branch_name: ${{ github.head_ref }}
 
   validate_release_pr_target:
     if: startsWith(github.head_ref, 'release/')

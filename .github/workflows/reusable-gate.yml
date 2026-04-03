@@ -3,17 +3,17 @@ name: Reusable gate
 on:
   workflow_call:
     inputs:
-      branch_name:
-        required: true
-        type: string
       tag:
         required: false
         type: boolean
         default: false
 
+env:
+  BRANCH_NAME: ${{ github.head_ref || github.ref_name }}
+
 jobs:
   validate_release:
-    if: inputs.branch_name == 'main'
+    if: ${{ (github.head_ref || github.ref_name) == 'main' }}
     runs-on: ubuntu-latest
     outputs:
       next_tag: ${{ steps.validate.outputs.next_tag }}
@@ -26,8 +26,6 @@ jobs:
 
       - name: Validate last RC tag
         id: validate
-        env:
-          BRANCH_NAME: ${{ inputs.branch_name }}
         run: |
           # validate last rc tag
           last_rc=$(git describe --tags --match "*rc*" --abbrev=0)
@@ -55,7 +53,7 @@ jobs:
           echo "next_tag=${rc_base}" >> "$GITHUB_OUTPUT"
 
   validate_candidate:
-    if: startsWith(inputs.branch_name, 'release/')
+    if: ${{ startsWith(github.head_ref || github.ref_name, 'release/') }}
     runs-on: ubuntu-latest
     outputs:
       next_tag: ${{ steps.validate.outputs.next_tag }}
@@ -68,8 +66,6 @@ jobs:
 
       - name: Validate branch name
         id: validate
-        env:
-          BRANCH_NAME: ${{ inputs.branch_name }}
         run: |
           # strictly validating the format of branch name
           if [[ ! "${BRANCH_NAME}" =~ ^release/(0|[1-9][0-9]*)\.(0|[1-9][0-9]*)\.(0|[1-9][0-9]*)$ ]]; then
