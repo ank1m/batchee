@@ -1,0 +1,39 @@
+name: Test and Build on PR
+
+on:
+  pull_request:
+
+permissions:
+  contents: read
+  packages: read
+
+jobs:
+  validate:
+    uses: ./.github/workflows/reusable-gate.yml
+    with:
+      branch_name: ${{ github.head_ref }}
+
+  validate_release_pr_target:
+    if: startsWith(github.head_ref, 'release/')
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Validate release PR target
+        env:
+          BASE: ${{ github.base_ref }}
+        run: |
+          if [[ "${BASE}" != "main" ]]; then
+            echo "PRs from release branches must target 'main'"
+            exit 1
+          else
+            echo "Valid: release branch PR targets main"
+          fi
+
+  tests:
+    uses: ./.github/workflows/reusable-tests.yml
+    secrets:
+      codecov_token: ${{ secrets.CODECOV_TOKEN }}
+
+  docker:
+    needs: tests
+    uses: ./.github/workflows/reusable-docker.yml
