@@ -8,9 +8,6 @@ permissions:
   packages: read
 
 jobs:
-  validate:
-    uses: ./.github/workflows/reusable-gate.yml
-
   validate_release_pr_target:
     if: startsWith(github.head_ref, 'release/')
     runs-on: ubuntu-latest
@@ -26,6 +23,10 @@ jobs:
           else
             echo "Valid: release branch PR targets main"
           fi
+
+  validate:
+    if: ${{ startsWith(github.head_ref, 'release/') || (github.head_ref == 'main') }}
+    uses: ./.github/workflows/reusable-gate.yml
 
   tests:
     uses: ./.github/workflows/reusable-tests.yml
