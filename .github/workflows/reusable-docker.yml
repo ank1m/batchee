@@ -15,7 +15,7 @@ env:
   IMAGE_NAME: ${{ github.repository }}
 
 jobs:
-  build_docker:
+  docker:
     runs-on: ubuntu-latest
 
     steps:
@@ -76,5 +76,5 @@ jobs:
           sbom: false
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
-          cache-from: type=gha
-          cache-to: type=gha,mode=max
+          cache-from: type=gha,scope=${{ (github.head_ref || github.ref_name) }}
+          cache-to: type=gha,mode=max,scope=${{ (github.head_ref || github.ref_name) }}
