@@ -5,6 +5,10 @@ on:
     branches:
       - main
 
+concurrency:
+  group: release-publish
+  cancel-in-progress: false
+
 jobs:
   tests:
     uses: ./.github/workflows/reusable-tests.yml
@@ -73,4 +77,3 @@ jobs:
             --title "Release ${current_tag}" \
             --generate-notes \
             --draft
-
