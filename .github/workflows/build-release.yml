@@ -71,5 +71,6 @@ jobs:
 
           gh release create "${current_tag}" \
             --title "Release ${current_tag}" \
-            --generate-notes
+            --generate-notes \
+            --draft
 
