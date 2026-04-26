@@ -29,4 +29,3 @@ ENV HOME=/home/dockeruser
 ENV PATH="/worker/.venv/bin:$PATH"
 
 ENTRYPOINT ["./docker-entrypoint.sh"]
-
