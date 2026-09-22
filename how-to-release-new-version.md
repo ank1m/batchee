@@ -101,6 +101,7 @@ stateDiagram-v2
 #### 1. Create a release branch and push it to github
 ```
 git checkout -b release/1.6.6 develop
+# modify CHANGELOG
 git push origin release/1.6.6
 ```
 > [!info] triggers push to release action:
