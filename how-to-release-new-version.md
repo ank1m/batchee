@@ -134,7 +134,7 @@ git push origin bugfix/test
 > - runs tests
 > - builds docker
 
-#### 4 Merge PR
+##### 3.3 Merge PR
 > [!info] triggers push to release action:
 > - runs tests
 > - builds docker
@@ -145,7 +145,7 @@ git push origin bugfix/test
 
 > [!info] also re-triggers PR to main action if PR was submitted, see #2
 
-#### 5 Merge PR from `release` branch to `main`
+#### 4 Merge PR from `release` branch to `main`
 > [!info] triggers push to main action:
 > - runs tests
 > - builds docker
@@ -156,4 +156,4 @@ git push origin bugfix/test
 > - creates auto-PR to backmerge `main` to `develop`: https://github.com/ank1m/batchee/pulls
 > - creates GitHub release with auto-generated notes: https://github.com/ank1m/batchee/releases
 
-#### 6 Approve and Merge auto-PR to backmerge `main` to `develop`
+#### 5 Approve and Merge auto-PR to backmerge `main` to `develop`
